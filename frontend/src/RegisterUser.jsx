@@ -1,4 +1,4 @@
-import { CalendarIcon, ChevronDownIcon, X } from "lucide-react";
+import { CalendarIcon, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./components/ui/button";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,38 +19,46 @@ function RegisterUser() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  function handleDateChange(date) {
+    const formatted = format(date, "yyyy-MM-dd");
+    setSelectedDate(formatted);
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (pass !== conformPass) {
-      setError("Passwords do not match Please correct");
+      setError("Passwords do not match. Please correct.");
       return;
     }
-
     setError("");
-
-    registerUsers({
+    const userPayload = {
       name: firstName,
       dob: selectedDate,
       email: userEmail,
       password: pass,
-    });
+    };
 
-    toast.success("You have Registered Sucessfully 🥳", {
-      action: { label: "Undo" },
-      description: (
-        <p className="mb-0 text-sm">
-          Kindly login with the registered Email and Password do not forget it
-          😉
-        </p>
-      ),
-    });
-    navigate("/login");
-  }
-
-  function handleDateChange(date) {
-    const formatted = format(date, "yyyy-MM-dd");
-    setSelectedDate(formatted);
+    try {
+      const res = await registerUsers(userPayload);
+      if (res) {
+        toast.success("You have Registered Successfully 🥳", {
+          action: { label: "Undo" },
+          description: (
+            <p className="mb-0 text-sm">
+              Kindly login with the registered Email and Password. Don’t forget
+              it 😉
+            </p>
+          ),
+        });
+        navigate("/login");
+      }
+    } catch (err) {
+      setError(err.message);
+      toast.error("Registration Failed ❌", {
+        description: <p className="text-sm">{err.message}</p>,
+      });
+    }
   }
 
   return (
@@ -67,6 +75,10 @@ function RegisterUser() {
         <h2 className="text-2xl font-semibold text-center mb-6 text-white">
           Register Your credentials 😉😉
         </h2>
+
+        {error && (
+          <p className="text-center text-red-500 font-semibold mb-4">{error}</p>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -86,6 +98,7 @@ function RegisterUser() {
               className="w-full px-4 py-2 border border-[#4b4b4b] bg-[#1b1b1b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
             />
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="lastName"
@@ -103,8 +116,9 @@ function RegisterUser() {
               className="w-full px-4 py-2 border border-[#4b4b4b] bg-[#1b1b1b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
             />
           </div>
+
           <div className="flex flex-col gap-2 relative w-full mb-4">
-            <label htmlFor="date" className="text-sm font-medium text-white ">
+            <label htmlFor="date" className="text-sm font-medium text-white">
               Select Date
             </label>
             <DatePicker
@@ -121,6 +135,7 @@ function RegisterUser() {
             />
             <CalendarIcon className="absolute top-10 left-3 text-white w-4 h-4 pointer-events-none" />
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="username"
@@ -138,6 +153,7 @@ function RegisterUser() {
               className="w-full px-4 py-2 border border-[#4b4b4b] bg-[#1b1b1b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
             />
           </div>
+
           <div className="mb-6">
             <label
               htmlFor="password"
@@ -155,6 +171,7 @@ function RegisterUser() {
               className="w-full px-4 py-2 border border-[#4b4b4b] bg-[#1b1b1b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
             />
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="conformPass"
@@ -171,12 +188,8 @@ function RegisterUser() {
               required
               className="w-full px-4 py-2  border border-[#4b4b4b] bg-[#1b1b1b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
             />
-            {error && (
-              <span className="text-sm text-red-600 font-bold mt-1">
-                {error}
-              </span>
-            )}
           </div>
+
           <div className="flex justify-center mt-8">
             <button
               type="submit"
@@ -184,15 +197,17 @@ function RegisterUser() {
             >
               Sign In
             </button>
-          </div>{" "}
+          </div>
+
           <p className="text-center mt-4">
-            Allready have an account?{" "}
+            Already have an account?{" "}
             <a href="/login" className="text-blue-600 underline">
               Sign In
             </a>
           </p>
         </form>
       </div>
+
       <div>
         <img
           src={leaf}

@@ -18,9 +18,9 @@ export default function UserDetails() {
         setLoading(false);
         return;
       }
-
+      const url = import.meta.env.VITE_API_BASE_URL;
       try {
-        const response = await fetch("http://localhost:5000/api/auth/all", {
+        const response = await fetch(`${url}auth/all`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

@@ -34,7 +34,7 @@ function Home() {
     <div className="flex flex-col md:flex-row  ">
       <section className="flex-1">
         <h1>Welcome to Quantum IT</h1>
-        <h4 className="w-1/2">
+        <h4 className="md:w-3/4 w-full">
           Here is a simple demonstration of React and Node.js where a user can
           register with their credentials. After logging in, if authenticated,
           they will be redirected to the user detail page which displays all

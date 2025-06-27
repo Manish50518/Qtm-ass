@@ -32,7 +32,9 @@ function Login() {
       }
     } catch (err) {
       setError(err.message);
-      console.error("Login error:", err.message);
+      toast.error("Registration Failed ❌", {
+        description: <p className="text-sm">{err.message}</p>,
+      });
     }
   }
 

@@ -1,12 +1,12 @@
 export async function loginUser(userDetails) {
-  const baseUrl = "http://localhost:5000/api";
+  const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
   if (!baseUrl) {
     throw new Error(
       "Configuration error: API base URL is missing. Please contact support."
     );
   }
-  const url = `${baseUrl}/auth/login`;
+  const url = `${baseUrl}auth/login`;
 
   try {
     const response = await fetch(url, {
