@@ -39,6 +39,12 @@ Use these credentials to log in:
 - Node.js v16+ (for backend & frontend)  
 - Yarn or npm
 
+![image](https://github.com/user-attachments/assets/4e9f05fe-76c7-4221-ace3-fa4accca2089)
+![image](https://github.com/user-attachments/assets/40992f11-26f6-45db-bde1-536be1b1efa8)
+![image](https://github.com/user-attachments/assets/d0c2d23e-fc7e-4189-82d7-082e1a11d930)
+![image](https://github.com/user-attachments/assets/1b10873a-1654-48ac-9eaa-333aeb01afb8)
+
+
 ### 1. Clone the Repository
 
 ```bash
