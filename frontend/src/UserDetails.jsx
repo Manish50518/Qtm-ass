@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { usersColumns } from "./components/table/user-coloumn";
-import { DataTable } from "./components/table/user-table";
+import { usersColumns } from "./components/table/UserColoumn";
+import { DataTable } from "./components/table/UserTable";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 

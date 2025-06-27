@@ -3,7 +3,6 @@ import {
   CalendarDays,
   CircleCheck,
   LogIn,
-  MoveDown,
   MoveRight,
   Rotate3d,
 } from "lucide-react";
@@ -38,8 +37,8 @@ function Home() {
         <h4 className="w-1/2">
           Here is a simple demonstration of React and Node.js where a user can
           register with their credentials. After logging in, if authenticated,
-          they will be redirected to the user detail page which displays their
-          information.
+          they will be redirected to the user detail page which displays all
+          users information.
         </h4>
 
         <div className="grid sm:grid-cols-2 grid-cols-1 w-3/4 mt-8 gap-4">
@@ -53,9 +52,9 @@ function Home() {
           ))}
         </div>
 
-        <h2 className="flex items-center gap-5 mt-6">
+        <h2 className="flex items-center  gap-5 mt-6">
           Demo
-          <MoveRight />
+          <MoveRight strokeWidth={4} color="red" />
         </h2>
 
         <div className="flex gap-4 mt-4">
