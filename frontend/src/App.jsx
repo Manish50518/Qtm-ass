@@ -3,8 +3,8 @@ import Home from "./Home";
 import Login from "./Login";
 import RegisterUser from "./RegisterUser";
 import UserDetails from "./UserDetails";
-import RequriedAuth from "./requriedAuth";
 import { Toaster } from "./components/ui/sonner";
+import RequriedAuth from "./RequriedAuth";
 function App() {
   return (
     <BrowserRouter>
